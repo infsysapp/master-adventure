@@ -1,4 +1,4 @@
-var shire = {
+var Shire = {
     'ImagePath': './assets/images/',
     'MusicPath': './assets/music/',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -6,13 +6,13 @@ var shire = {
     'CreatureTypes': ['goblin', 'thieve'], // Only one type per round.
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 2,// Might be more than one creature but of same type.
-    '|': 'Forest_01',
-    '-': Kingdom_of_Stevia['Route_03'],
-    '<-': Kingdom_of_Silver_Moon['City_Gate'],
-    '->' : 'swamp_01'
+    'N': 'Forest_02',
+    'S':'Route_03',
+    'E': 'X',
+    'W': 'X',
 };
 
-var forest_01 = {
+var Forest_01 = {
     'ImagePath': './assets/images/forest/forest-01.jpg',
     'MusicPath': './assets/music/forest-merged.mp3',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -20,11 +20,13 @@ var forest_01 = {
     'CreatureTypes': ['goblin', 'thieve'], // Only one type per round.
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 2,// Might be more than one creature but of same type.
-    '|': 'mountain_01',
-    '-': Kingdom_of_Stevia['Dave_Paradise']
+    'N': 'Dave_Paradise',
+    'S': 'Mountain_01',
+    'E': 'X',
+    'W': 'X'
 };
 
-var forest_02 = {
+var Forest_02 = {
     'ImagePath': './assets/images/forest/forest-02.jpg',
     'MusicPath': './assets/music/forest-merged.mp3',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -32,11 +34,13 @@ var forest_02 = {
     'CreatureTypes': ['goblin', 'thieve'],
     'MaximumCreaturesPerRound': 2,
     'MaximumCreatureRounds': 2,
-    '-': 'Shire',
-    '|': 'forest_03'
+    'N': 'Forest_03',
+    'S': 'Shire',
+    'E': 'X',
+    'W': 'X'
 };
 
-var forest_03 = {
+var Forest_03 = {
     'ImagePath': './assets/images/forest/forest-03.jpg',
     'MusicPath': './assets/music/forest-merged.mp3',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -44,13 +48,13 @@ var forest_03 = {
     'CreatureTypes': ['goblin'],
     'MaximumCreaturesPerRound': 3,
     'MaximumCreatureRounds': 1,
-    '<-': 'forest_04',
-    '|': 'Route_04',
-    '-': 'forest_02',
-    '->': 'forest_05'
+    'N': 'Route_04',
+    'S': 'Forest_02',
+    'E': 'X',
+    'W': 'X'
 };
 
-var forest_04 = {
+var Forest_04 = {
     'ImagePath': './assets/images/forest/forest-04.jpg',
     'MusicPath': './assets/music/forest-merged.mp3',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -58,11 +62,13 @@ var forest_04 = {
     'CreatureTypes': ['spider', 'tiger', 'bear'],
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 2,
-    '|': Kingdom_of_Silver_Moon['City_Gate'],
-    '-': 'Route_04'
+    'N': 'X',
+    'S': 'X',
+    'E': 'Route_04',
+    'W': 'City_Gate'
 };
 
-var forest_05 = {
+var Forest_05 = {
     'ImagePath': './assets/images/forest/forest-05.jpg',
     'MusicPath': './assets/music/forest-merged.mp3',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -70,11 +76,13 @@ var forest_05 = {
     'CreatureTypes': ['orc'],
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 2,
-    '-': 'swamp_01',
-    '|': 'Route_04'
+    'N': 'X',
+    'S': 'X',
+    'E': 'Swamp_01',
+    'W': 'Route_04'
 };
 
-var swamp_01 = {
+var Swamp_01 = {
     'ImagePath': './assets/images/swamp/swamp-01.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -82,10 +90,13 @@ var swamp_01 = {
     'CreatureTypes': ['orc'],
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 2,
-    '-': 'forest_05'
+    'N': 'X',
+    'S': 'X',
+    'E': 'X',
+    'W': 'Forest_05'
 };
 
-var swamp_01_boss = {
+var Swamp_01_Boss = {
     'ImagePath': './assets/images/swamp/swamp-01-boss.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -93,10 +104,13 @@ var swamp_01_boss = {
     'CreatureTypes': ['orcGeneral'],
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 1,
-    '-': 'forest_05'
+    'N': 'X',
+    'S': 'X',
+    'E': 'X',
+    'W': 'Forest_05'
 };
 
-var mountain_01 = {
+var Mountain_01 = {
     'ImagePath': './assets/images/mountain/mountain-01.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -104,11 +118,13 @@ var mountain_01 = {
     'CreatureTypes': ['thieve', 'lion'],
     'MaximumCreaturesPerRound': 2,
     'MaximumCreatureRounds': 2,
-    '-': 'forest_01',
-    '->': Kingdom_of_Golden_Cave['City_Gate_01']
+    'N': 'Forest_01',
+    'S':'X',
+    'E': 'City_Gate_01',
+    'W': 'X'
 };
 
-var mountain_02 = {
+var Mountain_02 = {
     'ImagePath': './assets/images/mountain/mountain-02.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -116,11 +132,13 @@ var mountain_02 = {
     'CreatureTypes': ['eagle', 'lion'],
     'MaximumCreaturesPerRound': 2,
     'MaximumCreatureRounds': 2,
-    '-': 'rainy_mountain',
-    '<-': 'fiery_mountain'
+    'N': 'Fiery_Mountain',
+    'S': 'X',
+    'E': 'X',
+    'W': 'Rainy_Mountain',
 };
 
-var rainy_mountain = {
+var Rainy_Mountain = {
     'ImagePath': './assets/images/mountain/rainy-mountain.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -128,11 +146,13 @@ var rainy_mountain = {
     'CreatureTypes': ['eagle', 'lion'],
     'MaximumCreaturesPerRound': 2,
     'MaximumCreatureRounds': 2,
-    '|': 'mountain_02',
-    '-': Kingdom_of_Golden_Cave['City_Gate_02']
+    'N': 'X',
+    'S': 'X',
+    'E': 'Mountain_02',
+    'W': 'City_Gate_02'
 };
 
-var fiery_mountain = {
+var Fiery_Mountain = {
     'ImagePath': './assets/images/mountain/fierry-mountain.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -140,11 +160,13 @@ var fiery_mountain = {
     'CreatureTypes': ['eagle', 'lion'],
     'MaximumCreaturesPerRound': 2,
     'MaximumCreatureRounds': 1,
-    '-': 'mountain_02',
-    '<-': 'rainy_mountain'
+    'N': 'X',
+    'S': 'Mountain_02',
+    'E': 'Rainy_Mountain',
+    'W': 'X',
 };
 
-var fiery_mountain_boss = {
+var Fiery_Mountain_Boss = {
     'ImagePath': './assets/images/mountain/fierry-mountain-boss.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -152,11 +174,13 @@ var fiery_mountain_boss = {
     'CreatureTypes': ['dragon'],
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 1,
-    '-': 'mountain_02',
-    '<-': 'rainy_mountain'
+    'N': 'X',
+    'S': 'Mountain_02',
+    'E': 'Rainy_Mountain',
+    'W': 'X'
 };
 
-var forgotten_mine = {
+var Forgotten_Mine = {
     'ImagePath': './assets/images/forgotten-mine/forgotten-mine.jpg',
     'MusicPath': './assets/music/forgotten-mine.mp3',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -164,13 +188,13 @@ var forgotten_mine = {
     'CreatureTypes': ['goblin', 'bat'],
     'MaximumCreaturesPerRound': 1,
     'MaximumCreatureRounds': 1,
-    '-': 'Route_03',
-    '|': 'foggy_mountain',
-    '<-': 'Shire',
-    '->': Kingdom_of_Golden_Cave['Sky_is_the_Limit_Travel']
+    'N': 'Shire',
+    'S': 'X',
+    'E': 'Foggy_Mountain',
+    'W': 'Route_03' 
 };
 
-var foggy_mountain = {
+var Foggy_Mountain = {
     'ImagePath': './assets/images/mountain/foggy-mountain.jpg',
     'MusicPath': '',
     'BattleMusicPath': './assets/music/battle-music.mp3',
@@ -178,7 +202,8 @@ var foggy_mountain = {
     'CreatureTypes': ['dragon'],
     'MaximumCreaturesPerRound': 2,
     'MaximumCreatureRounds': 1,
-    '-': 'forgotten_mine',
-    '<-': 'Shire',
-    '->': Kingdom_of_Golden_Cave['Sky_is_the_Limit_Travel']
+    'N': 'X',
+    'S': 'X',
+    'E': 'Forgotten_Mine',
+    'W': 'Foggy_Mountain'
 };

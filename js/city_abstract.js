@@ -3,14 +3,18 @@ var Kingdom_of_Stevia = {
     'Route_01': {
         'ImagePath': './assets/images/directions/Route-01.jpg',
         'MusicPath': './assets/music/shire.mp3',
-        '->': 'Monaco',
-        '<-': 'Westphalia',
-        '-': 'Paladin_Order',
+        'N': 'Westphalia',
+        'S': 'Monaco',
+        'E': 'X',
+        'W': 'Paladin_Order'
     },
     'Dave_Paradise': {
         'ImagePath': './assets/images/dave-paradise',
         'MusicPath': './assets/music/dave-paradise.pm3',
-        '<-': 'Route_03',
+        'N': 'Route_03',
+        'S': 'Forest_01',
+        'E': 'X',
+        'W': 'X',
         "Store": {
             'Name': 'Conan\'s Chest',
             'ImagePath': '',
@@ -40,31 +44,38 @@ var Kingdom_of_Stevia = {
     'City_Gate': {
         'ImagePath': './assets/images/gate/stevia-gate.jpg',
         'MusicPath': './assets/music/city-gate.mp3',
-        '|': 'Route_03',
-        '-': 'Ford_Plaza',
+        'N': 'X',
+        'S': 'X',
+        'E': 'Route_03',
+        'W': 'Ford_Plaza'
     },
     'Ford_Plaza': {
         'ImagePath': './assets/images/stevia/ford-plaza.jpg',
         'MusicPath': './assets/music/ford-plaza.mp3',
-        '|': 'Route_03',
-        '-': 'Ford_Plaza',
+        'N': 'X',
+        'S': 'X',
+        'E': 'City_Gate',
+        'W': 'Route_02'
     },
     'Route_02': {
         'ImagePath': './assets/images/stevia/route-02.jpg',
         'MusicPath': './assets/music/shire.mp3',
-        '<-': 'Ford_Plaza',
-        '->': 'Monaco',
-        '<-': 'Westphalia',
+        'N': 'Westphalia',
+        'S': 'Monaco',
+        'E': 'Ford_Plaza',
+        'W': 'X'
     },
     'Monaco': {
         'ImagePath': './assets/images/stevia/monaco.jpg',
-        'MusicPath': './assets/music/',
-        '<-': 'Route_01',
-        '->': 'Route_02',
+        'MusicPath': './assets/music/ford-plaza.mp3',
+        'N': 'Westphalia',
+        'S': 'X',
+        'E': 'Route_02',
+        'W': 'Route_01',
         'Store': {
             'Name': 'Raganar\'s Irons',
-            'ImagePath': '',
-            'MusicPath': '',
+            'ImagePath': './assets/images/stevia/temp-monaco-store.jpg',
+            'MusicPath': './assets/music/tavern.mp3',
             'OwnerName': 'Rolo',
             'OwnerImage': '',
             'OwnerIntro': ['', '', ''],
@@ -90,8 +101,10 @@ var Kingdom_of_Stevia = {
     'Westphalia': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '<-': 'Route_01',
-        '->': 'Route_02',
+        'N': 'X',
+        'S': 'Monaco',
+        'E': 'Route_02',
+        'W': 'Route_01',
         'Store': {
             'Name': 'Clausthaler Tavern',
             'ImagePath': '',
@@ -111,14 +124,18 @@ var Kingdom_of_Stevia = {
     'Route_03': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '->': 'Dave_Paradise',
-        '<-': 'Shire',
-        '-': 'Forgotten_Mine',
+        'N': 'Shire',
+        'S': 'Dave_Paradise',
+        'E': 'Forgotten_Mine',
+        'W': 'City_Gate',
     },
     'Paladin_Order': {
         'ImagePath': './assets/images/stevia/paladin-order.jpg',
         'MusicPath': './assets/music/Intro.mp3',
-        '->': 'Route_01',
+        'N': 'X',
+        'S': 'X',
+        'E': 'Route_01',
+        'W': 'X'
     },
     'MusicPath': './assets/music/stevia.mp3'
 };
@@ -127,14 +144,18 @@ var Kingdom_of_Silver_Moon = {
     'City_Gate': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '|': 'White_Trades',
-        '-': 'Forest_04',
+        'N': 'X',
+        'S': 'X',
+        'E': 'Forest_04',
+        'W': 'White_Trades',
     },
     'White_Trades': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '|': 'Tower_of_High_Elvess',
-        '-': 'City_Gate',
+        'N': 'X',
+        'S': 'X',
+        'E': 'City_Gate',
+        'W': 'Tower_of_High_Elves',
         'Store': {
             'Name': 'Forgotten Treasures',
             'ImagePath': '',
@@ -165,13 +186,18 @@ var Kingdom_of_Silver_Moon = {
     'Tower_of_High_Elves': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '->': 'Poets_Escape_Port',
-        '-': 'White_Trades',
+        'N': 'Poets_Escape_Port',
+        'S': 'X',
+        'E': 'White_Trades',
+        'W': 'X'
     },
     'Poets_Escape_Port': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '-': 'Tower_of_High_Elvess',
+        'N': 'X',
+        'S': 'Tower_of_High_Elves',
+        'E': 'X',
+        'W': 'X'
     }
 };
 
@@ -179,13 +205,18 @@ var Kingdom_of_Golden_Cave = {
     'City_Gate_01': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '|': 'Marker_Coin_Plaza',
+        'N': 'Monaco',
+        'S': 'Westphalia',
+        'E': 'Marker_Coin_Plaza',
+        'W': 'Mountain_01'
     },
     'Marker_Coin_Plaza': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '|': 'Marker_Coin_Plaza',
-        '<-': 'Sky_is_the_Limit_Travel',
+        'N': 'X',
+        'S': 'X',
+        'E': 'Red_Beard_District',
+        'W': 'City_Gate_01',
         'Store': {
             'Name': 'Smaug Kabob',
             'ImagePath': '',
@@ -213,9 +244,10 @@ var Kingdom_of_Golden_Cave = {
     'Red_Beard_District': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '-': 'Marker_Coin_Plaza',
-        '<-': 'Sky_is_the_Limit_Travel',
-        '|': 'Sky_is_the_Limit_Travel',
+        'N': 'Sky_is_the_Limit_Travel',
+        'S': 'Westphalia',
+        'E': 'City_Gate_02',
+        'W': 'Marker_Coin_Plaza',
         'Store': {
             'Name': 'Tavern ',
             'ImagePath': '',
@@ -245,17 +277,18 @@ var Kingdom_of_Golden_Cave = {
     'Sky_is_the_Limit_Travel': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '-': 'Marker_Coin_Plaza',
-        '|': 'City_Gate_02',
-        '->': 'Red_Beard_District',
+        'N': 'X',
+        'S': 'Red_Beard_District',
+        'E': 'City_Gate_02',
+        'W': 'X'
     },
-    'Route': {},
     'City_Gate_02': {
         'ImagePath': './assets/images/',
         'MusicPath': './assets/music/',
-        '-': 'Red_Beard_District',
-        '|': 'rainy_mountain',
-        '<-': 'Sky_is_the_Limit_Travel',
+        'N': 'X',
+        'S': 'X',
+        'E': 'Rainy_Mountain',
+        'W': 'Red_Beard_District'
     }
 };
 
