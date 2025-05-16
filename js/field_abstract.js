@@ -12,7 +12,7 @@ var arctica = {
             'ImagePath': './assets/images/dave-paradise',
             'MusicPath': './assets/music/dave-paradise.pm3',
             'N': 'Route_03',
-            'S': 'Forest_01',
+            'S':  {'Fields' :'Forest_01'},
             'E': 'X',
             'W': 'X',
             "Store": {
@@ -68,7 +68,7 @@ var arctica = {
         'Monaco': {
             'ImagePath': './assets/images/stevia/monaco.jpg',
             'MusicPath': './assets/music/ford-plaza.mp3',
-            'N': 'Westphalia',
+            'N': 'X',
             'S': 'X',
             'E': 'Route_02',
             'W': 'Route_01',
@@ -78,8 +78,8 @@ var arctica = {
                 'MusicPath': './assets/music/tavern.mp3',
                 'OwnerName': 'Rolo',
                 'OwnerImage': '',
-                'OwnerIntro': ['', '', ''],
-                'OwmerOutro': ['', '', ''],
+                'OwnerIntro': ['Crushing the enemy! Have a look at my chest', 'Want to see them destroyed, I have the perfect knife for you', 'Have you heard the lament of the wives of their fallen husbands? Welcome to paradise! '],
+                'OwmerOutro': ['RAWWWRRR Dont comeback without annihilation of the enemy!', 'Briink to Connan enemy money', 'Begone from my store and conquer the world.'],
                 'Inventory':
                 {
                     'Armory':
@@ -102,7 +102,7 @@ var arctica = {
             'ImagePath': './assets/images/stevia/temp-westphalia.jpg',
             'MusicPath': './assets/music/shire.mp3',
             'N': 'X',
-            'S': 'Monaco',
+            'S': 'X',
             'E': 'Route_02',
             'W': 'Route_01',
             'Store': {
@@ -124,11 +124,10 @@ var arctica = {
         'Route_03': {
             'ImagePath': './assets/images/stevia/route-02.jpg',
             'MusicPath': './assets/music/ford-plaza.mp3',
-            'N': 'Shire',
+            'N':  {'Fields' :'Shire'},
             'S': 'Dave_Paradise',
             'E': {'Fields': 'Forgotten_Mine'},
-
-            'W': 'City_Gate',
+            'W': 'City_Gate'
         },
         'Paladin_Order': {
             'ImagePath': './assets/images/stevia/paladin-order.jpg',
@@ -142,11 +141,11 @@ var arctica = {
     },
     'Kingdom_of_Silver_Moon': {
         'City_Gate': {
-            'ImagePath': './assets/images/',
-            'MusicPath': './assets/music/',
+            'ImagePath': './assets/images/gate/city-gate-silver-moon.jpg',
+            'MusicPath': './assets/music/city-gate.mp3',
             'N': 'X',
             'S': 'X',
-            'E': 'Forest_04',
+            'E':  {'Fields' :'Forest_04'},
             'W': 'White_Trades',
         },
         'White_Trades': {
@@ -207,7 +206,7 @@ var arctica = {
             'N': 'Monaco',
             'S': 'Westphalia',
             'E': 'Marker_Coin_Plaza',
-            'W': 'Mountain_01'
+            'W':  {'Fields' : 'Mountain_01'}
         },
         'Marker_Coin_Plaza': {
             'ImagePath': './assets/images/',
@@ -278,7 +277,7 @@ var arctica = {
             'MusicPath': './assets/music/',
             'N': 'X',
             'S': 'Red_Beard_District',
-            'E': 'City_Gate_02',
+            'E': 'X',
             'W': 'X'
         },
         'City_Gate_02': {
@@ -286,21 +285,21 @@ var arctica = {
             'MusicPath': './assets/music/',
             'N': 'X',
             'S': 'X',
-            'E': 'Rainy_Mountain',
+            'E':  {'Fields' :'Rainy_Mountain'},
             'W': 'Red_Beard_District'
         }
     },
     'Fields': {
-        'shire': {
-            'ImagePath': './assets/images/',
-            'MusicPath': './assets/music/',
+        'Shire': {
+            'ImagePath': './assets/images/shire/shire.jpg',
+            'MusicPath': './assets/music/forest-merged.mp3',
             'BattleMusicPath': './assets/music/battle-music.mp3',
             'CreatureAppearanceChance': 30, // Percent per round. If random_x >= CreatureAppearanceChance then summon creature by creature type.
             'CreatureTypes': ['goblin', 'thieve'], // Only one type per round.
             'MaximumCreaturesPerRound': 1,
             'MaximumCreatureRounds': 2,// Might be more than one creature but of same type.
-            'N': 'Forest_02',
-            'S': 'Route_03',
+            'N':  {'Fields' : 'Forest_02'},
+            'S': {'Kingdom_of_Stevia' : 'Route_03'},
             'E': 'X',
             'W': 'X',
         },
@@ -312,8 +311,8 @@ var arctica = {
             'CreatureTypes': ['goblin', 'thieve'], // Only one type per round.
             'MaximumCreaturesPerRound': 1,
             'MaximumCreatureRounds': 2,// Might be more than one creature but of same type.
-            'N': 'Dave_Paradise',
-            'S': 'Mountain_01',
+            'N':{'Kingdom_of_Stevia':  'Dave_Paradise'},
+            'S': {'Fields' : 'Mountain_01'},
             'E': 'X',
             'W': 'X'
         },
@@ -325,8 +324,8 @@ var arctica = {
             'CreatureTypes': ['goblin', 'thieve'],
             'MaximumCreaturesPerRound': 2,
             'MaximumCreatureRounds': 2,
-            'N': 'Forest_03',
-            'S': 'Shire',
+            'N': {'Fields': 'Forest_03'},
+            'S': {'Fields': 'Shire'},
             'E': 'X',
             'W': 'X'
         },
@@ -338,10 +337,18 @@ var arctica = {
             'CreatureTypes': ['goblin'],
             'MaximumCreaturesPerRound': 3,
             'MaximumCreatureRounds': 1,
-            'N': 'Route_04',
-            'S': 'Forest_02',
+            'N': {'Fields': 'Route_04'},
+            'S': {'Fields' : 'Forest_02'},
             'E': 'X',
             'W': 'X'
+        },
+        'Route_04': {
+            'ImagePath': './assets/images/directions/route-04.jpg',
+            'MusicPath': './assets/music/ford-plaza.mp3',
+            'N': 'X',
+            'S': { 'Fields': 'Forest_03' },
+            'E': { 'Fields': 'Forest_05' },
+            'W': { 'Fields': 'Forest_04' },
         },
         'Forest_04': {
             'ImagePath': './assets/images/forest/forest-04.jpg',
@@ -353,8 +360,8 @@ var arctica = {
             'MaximumCreatureRounds': 2,
             'N': 'X',
             'S': 'X',
-            'E': 'Route_04',
-            'W': 'City_Gate'
+            'E': {'Fields' :'Route_04'},
+            'W': {'Kingdom_of_Silver_Moon': 'City_Gate'},
         },
         'Forest_05': {
             'ImagePath': './assets/images/forest/forest-05.jpg',
@@ -366,12 +373,12 @@ var arctica = {
             'MaximumCreatureRounds': 2,
             'N': 'X',
             'S': 'X',
-            'E': 'Swamp_01',
-            'W': 'Route_04'
+            'E': {'Fields' :'Swamp_01'},
+            'W': {'Fields' :'Route_04'}
         },
-        ' Swamp_01': {
+        'Swamp_01': {
             'ImagePath': './assets/images/swamp/swamp-01.jpg',
-            'MusicPath': '',
+            'MusicPath': './assets/music/forest-merged.mp3',
             'BattleMusicPath': './assets/music/battle-music.mp3',
             'CreatureAppearanceChance': 60,
             'CreatureTypes': ['orc'],
@@ -380,7 +387,7 @@ var arctica = {
             'N': 'X',
             'S': 'X',
             'E': 'X',
-            'W': 'Forest_05'
+            'W': {'Fields' : 'Forest_05'}
         },
         'Swamp_01_Boss': {
             'ImagePath': './assets/images/swamp/swamp-01-boss.jpg',
@@ -393,7 +400,7 @@ var arctica = {
             'N': 'X',
             'S': 'X',
             'E': 'X',
-            'W': 'Forest_05'
+            'W': {'Fields' :'Forest_05'}
         },
         'Mountain_01': {
             'ImagePath': './assets/images/mountain/mountain-01.jpg',
@@ -403,9 +410,9 @@ var arctica = {
             'CreatureTypes': ['thieve', 'lion'],
             'MaximumCreaturesPerRound': 2,
             'MaximumCreatureRounds': 2,
-            'N': 'Forest_01',
+            'N':{'Fields' : 'Forest_01'},
             'S': 'X',
-            'E': 'City_Gate_01',
+            'E':{'Kingdom_of_Golden_Cave' : 'City_Gate_01'},
             'W': 'X'
         },
         "Mountain_02": {
@@ -416,10 +423,10 @@ var arctica = {
             'CreatureTypes': ['eagle', 'lion'],
             'MaximumCreaturesPerRound': 2,
             'MaximumCreatureRounds': 2,
-            'N': 'Fiery_Mountain',
+            'N': {'Fields' :'Fiery_Mountain'},
             'S': 'X',
             'E': 'X',
-            'W': 'Rainy_Mountain',
+            'W': {'Fields' :'Rainy_Mountain'}
         },
         'Rainy_Mountain': {
             'ImagePath': './assets/images/mountain/rainy-mountain.jpg',
@@ -431,8 +438,8 @@ var arctica = {
             'MaximumCreatureRounds': 2,
             'N': 'X',
             'S': 'X',
-            'E': 'Mountain_02',
-            'W': 'City_Gate_02'
+            'E': {'Fields' :'Mountain_02'},
+            'W': {'Kingdom_of_Golden_Cave' :'City_Gate_02'}
         },
         'Fiery_Mountain': {
             'ImagePath': './assets/images/mountain/fierry-mountain.jpg',
@@ -443,8 +450,8 @@ var arctica = {
             'MaximumCreaturesPerRound': 2,
             'MaximumCreatureRounds': 1,
             'N': 'X',
-            'S': 'Mountain_02',
-            'E': 'Rainy_Mountain',
+            'S': {'Fields' :'Mountain_02'},
+            'E': 'X',
             'W': 'X',
         },
         'Fiery_Mountain_Boss': {
@@ -456,8 +463,8 @@ var arctica = {
             'MaximumCreaturesPerRound': 1,
             'MaximumCreatureRounds': 1,
             'N': 'X',
-            'S': 'Mountain_02',
-            'E': 'Rainy_Mountain',
+            'S':  {'Fields' :'Mountain_02'},
+            'E':  {'Fields' :'Rainy_Mountain'},
             'W': 'X'
         },
         'Forgotten_Mine': {
@@ -468,7 +475,7 @@ var arctica = {
             'CreatureTypes': ['goblin', 'bat'],
             'MaximumCreaturesPerRound': 1,
             'MaximumCreatureRounds': 1,
-            'N': {'Fields': 'Shire'},
+            'N': 'X',
             'S': 'X',
             'E': {'Fields': 'Foggy_Mountain'},
             'W': {'Kingdom_of_Stevia' : 'Route_03'}
