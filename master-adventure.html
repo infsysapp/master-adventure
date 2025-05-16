@@ -4,23 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <style>
+    #master-element {
+      width: 600px;
+      height: 500px;
+      position: relative;
+    }
+
     #master-element>img {
-      object-fit: contain;
+      object-fit: cover;
       width: 600px;
       height: 500px;
 
+    }
+
+    #display-dialog-box {
+      /*display : none;*/
+      width: inherit;
+      height: 25%;
+      position: absolute;
+      top: 75%;
+      left: 0px;
+      display: none;
+      border: 2px solid #BEDCFE;
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0.2px 0.3px 2px 1px #999;
+      color: white;
     }
   </style>
 </head>
 
 <body>
   <h2 id="tile-title"></h2>
-  <div id="master-element" width="600" height="500" onclick="play_stop_game();">
+  <div id="master-element" onclick="play_stop_game();">
     <img id="master-image" src="./assets/images/buttons/click-img.jpg" alt="Click to Play">
     <audio id="audio-master">
       <source id="audio-source" src="">
       </source>
     </audio>
+    <div id="display-dialog-box"></div>
   </div>
   <br>
   <button id="top-button" onclick="top_button();" width="100" height="50" disabled>Top</button>
@@ -31,21 +52,20 @@
   <button id="bottom-button" onclick="bottom_button();" width="100" height="50" disabled>Down</button>
   <br>
   <br>
-  <button id="access-store" onclick="access_store_button();" width="100" height="50" disabled>Enter-Store</button>
+  <button id="access-store" onclick="access_store_button();" width="100" height="50" disabled>Enter Store</button>
+
 
   <script src="./js/player_abstract.js"></script>
   <script src="./js/field_abstract.js"></script>
   <!--<script src="./js/store_abstract.js"></script>-->
 
   <script>
-    var arctica_top_tile_list = Object.keys(arctica);
-    var arctica_current_top_tile_index = 'Kingdom_of_Stevia';
-
-
     var game_states = {
+      'Top_Tile': 'Kingdom_of_Stevia',
       'Tile': 'Paladin_Order',
-      'Image': arctica[arctica_current_top_tile_index]['Paladin_Order']['ImagePath'],
-      'Music': arctica[arctica_current_top_tile_index]['Paladin_Order']['MusicPath'],
+      'Image': arctica['Kingdom_of_Stevia']['Paladin_Order']['ImagePath'],
+      'Music': arctica['Kingdom_of_Stevia']['Paladin_Order']['MusicPath'],
+      'Store': false
     };
     //game_states.push(player_abstract);
     var game_pause = true;
@@ -54,66 +74,109 @@
     var tile_image = master_element.children[0];
     var audio_master = master_element.children[1];
     var audio_source = audio_master.children[0];
+    var previous_tile_music = null;
 
     function play_stop_game() {
-      disable_control();
-
+      if (arctica['Store'] == true) {
+        if (false == game_pause) {
+          disable_enable_control();
+          var store_tile = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['Name'];
+          var store_image = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['ImagePath'];
+          var store_music = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['MusicPath'];
+          //tile_title.textContent = store_tile.replace("_", " ");
+          tile_image.src = store_image;
+            audio_source.src = store_music;
+            audio_master.load();
+            audio_master.play();
+          window.document.getElementById('display-dialog-box').style.display = "block";
+          game_pause = true;
+        } else if (true == game_pause) {
+          disable_control();
+          tile_image.src = "./assets/images/buttons/click-img.jpg";
+          audio_master.pause();
+          window.document.getElementById('display-dialog-box').style.display = "none";
+          game_pause = false;
+        }
+        return null;
+      }
+      disable_enable_control();
       if (false == game_pause) {
-        tile_title.textContent = game_states['Tile'].replace("_", " ");
+        var text_title = '';
+        text_title = game_states['Top_Tile'].replaceAll("_", " ");
+        text_title += " - " + game_states['Tile'].replaceAll("_", " ");
+        tile_title.textContent = text_title;
         tile_image.src = game_states['Image'];
-        audio_source.src = game_states['Music'];
-        audio_master.load();
-        audio_master.play();
+        if (game_states['Music'] != previous_tile_music) {
+          audio_source.src = game_states['Music'];
+          audio_master.load();
+          audio_master.play();
+        }
+        previous_tile_music = game_states['Music'];
         game_pause = true;
       } else if (true == game_pause) {
+        disable_control();
         tile_image.src = "./assets/images/buttons/click-img.jpg";
         audio_master.pause();
         game_pause = false;
       }
     }
     function disable_control() {
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['N'] != 'X') {
+      window.document.getElementById("top-button").disabled = true;
+      window.document.getElementById("left-button").disabled = true;
+      window.document.getElementById("right-button").disabled = true;
+      window.document.getElementById("bottom-button").disabled = true;
+      window.document.getElementById("access-store").disabled = true;
+    }
+
+
+    function disable_enable_control() {
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['N'] != 'X') {
         window.document.getElementById("top-button").disabled = false;
       } else {
         window.document.getElementById("top-button").disabled = true;
       }
 
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['W'] != 'X') {
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['W'] != 'X') {
         window.document.getElementById("left-button").disabled = false;
       } else {
         window.document.getElementById("left-button").disabled = true;
       }
 
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['E'] != 'X') {
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['E'] != 'X') {
         window.document.getElementById("right-button").disabled = false;
       } else {
         window.document.getElementById("right-button").disabled = true;
       }
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['S'] != 'X') {
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['S'] != 'X') {
         window.document.getElementById("bottom-button").disabled = false;
       } else {
         window.document.getElementById("bottom-button").disabled = true;
       }
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['Store'] != 'X') {
-        window.document.getElementById("access-store").disabled = false;
-      } else {
-        window.document.getElementById("access-store").disabled = true;
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['Store'] != undefined) {
+        if (arctica[game_states['Top_Tile']][game_states['Tile']]['Store'] != 'X') {
+          window.document.getElementById("access-store").disabled = false;
+        } else {
+          window.document.getElementById("access-store").disabled = true;
+        }
       }
-
     }
     function top_button() {
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['N'] != 'X') {
-        if (typeof arctica[arctica_current_top_tile_index][game_states['Tile']]['N'] === "string") {
-          game_states.Tile = arctica[arctica_current_top_tile_index][game_states['Tile']]['N'];
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+      if (arctica['Store'] == true) {
+
+        return null;
+      }
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['N'] != 'X') {
+        if (typeof arctica[game_states['Top_Tile']][game_states['Tile']]['N'] === "string") {
+          game_states.Tile = arctica[game_states['Top_Tile']][game_states['Tile']]['N'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
         } else {
-          var tile_obj = arctica[arctica_current_top_tile_index][game_states['Tile']]['N'];
+          var tile_obj = arctica[game_states['Top_Tile']][game_states['Tile']]['N'];
           var top_tile = Object.keys(tile_obj)[0];
           game_states.Tile = tile_obj[top_tile];
           set_top_level_tile(top_tile);
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
         }
         game_pause = false;
         play_stop_game();
@@ -121,18 +184,22 @@
     }
 
     function left_button() {
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['W'] != 'X') {
-        if (typeof arctica[arctica_current_top_tile_index][game_states['Tile']]['W'] === "string") {
-          game_states.Tile = arctica[arctica_current_top_tile_index][game_states['Tile']]['W'];
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+      if (arctica['Store'] == true) {
+
+        return null;
+      }
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['W'] != 'X') {
+        if (typeof arctica[game_states['Top_Tile']][game_states['Tile']]['W'] === "string") {
+          game_states.Tile = arctica[game_states['Top_Tile']][game_states['Tile']]['W'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
         } else {
-          var tile_obj = arctica[arctica_current_top_tile_index][game_states['Tile']]['W'];
+          var tile_obj = arctica[game_states['Top_Tile']][game_states['Tile']]['W'];
           var top_tile = Object.keys(tile_obj)[0];
           game_states.Tile = tile_obj[top_tile];
           set_top_level_tile(top_tile);
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
 
         }
         game_pause = false;
@@ -141,18 +208,22 @@
 
     }
     function right_button() {
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['E'] != 'X') {
-        if (typeof arctica[arctica_current_top_tile_index][game_states['Tile']]['E'] === "string") {
-          game_states.Tile = arctica[arctica_current_top_tile_index][game_states['Tile']]['E'];
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+      if (arctica['Store'] == true) {
+
+        return null;
+      }
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['E'] != 'X') {
+        if (typeof arctica[game_states['Top_Tile']][game_states['Tile']]['E'] === "string") {
+          game_states.Tile = arctica[game_states['Top_Tile']][game_states['Tile']]['E'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
         } else {
-          var tile_obj = arctica[arctica_current_top_tile_index][game_states['Tile']]['E'];
+          var tile_obj = arctica[game_states['Top_Tile']][game_states['Tile']]['E'];
           var top_tile = Object.keys(tile_obj)[0];
           game_states.Tile = tile_obj[top_tile];
           set_top_level_tile(top_tile);
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
 
         }
         game_pause = false;
@@ -160,18 +231,22 @@
       }
     }
     function bottom_button() {
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['S'] != 'X') {
-        if (typeof arctica[arctica_current_top_tile_index][game_states['Tile']]['S'] === "string") {
-          game_states.Tile = arctica[arctica_current_top_tile_index][game_states['Tile']]['S'];
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+      if (arctica['Store'] == true) {
+
+        return null;
+      }
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['S'] != 'X') {
+        if (typeof arctica[game_states['Top_Tile']][game_states['Tile']]['S'] === "string") {
+          game_states.Tile = arctica[game_states['Top_Tile']][game_states['Tile']]['S'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
         } else {
-          var tile_obj = arctica[arctica_current_top_tile_index][game_states['Tile']]['S'];
+          var tile_obj = arctica[game_states['Top_Tile']][game_states['Tile']]['S'];
           var top_tile = Object.keys(tile_obj)[0];
           game_states.Tile = tile_obj[top_tile];
           set_top_level_tile(top_tile);
-          game_states.Image = arctica[arctica_current_top_tile_index][game_states['Tile']]['ImagePath'];
-          game_states.Music = arctica[arctica_current_top_tile_index][game_states['Tile']]['MusicPath'];
+          game_states.Image = arctica[game_states['Top_Tile']][game_states['Tile']]['ImagePath'];
+          game_states.Music = arctica[game_states['Top_Tile']][game_states['Tile']]['MusicPath'];
 
         }
         game_pause = false;
@@ -179,19 +254,41 @@
       }
     }
     function access_store_button() {
-      if (arctica[arctica_current_top_tile_index][game_states['Tile']]['Store'] != 'X') {
-        // console.log(Kingdom_of_Stevia[game_states['Tile']]['Store']['Name']);
-        // console.log(Kingdom_of_Stevia[game_states['Tile']]['Store']['ImagePath']);
-        // console.log(Kingdom_of_Stevia[game_states['Tile']]['Store']['MusicPath']);
-        // console.log(game_states);
-        var store_tile = arctica[arctica_current_top_tile_index][game_states['Tile']]['Store']['Name'];
-        var store_image = arctica[arctica_current_top_tile_index][game_states['Tile']]['Store']['ImagePath'];
-        var store_music = arctica[arctica_current_top_tile_index][game_states['Tile']]['Store']['MusicPath'];
-        tile_title.textContent = store_tile.replace("_", " ");
+      if (arctica['Store'] == true) {
+        arctica['Store'] = false;
+        window.document.getElementById('access-store').textContent = "Enter Store";
+        window.document.getElementById('display-dialog-box').style.display = "none";
+        var text_title = '';
+        text_title = game_states['Top_Tile'].replaceAll("_", " ");
+        text_title += " - " + game_states['Tile'].replaceAll("_", " ");
+        tile_title.textContent = text_title;
+        tile_image.src = game_states['Image'];
+        audio_source.src = game_states['Music'];
+        audio_master.load();
+        audio_master.play();
+        return null;
+      }
+      if (arctica[game_states['Top_Tile']][game_states['Tile']]['Store'] != 'X') {
+        arctica['Store'] = true;
+        window.document.getElementById('access-store').textContent = "Exit Store";
+        var store_tile = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['Name'];
+        var store_image = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['ImagePath'];
+        var store_music = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['MusicPath'];
+        var owner_intros = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['OwnerIntro'];
+        var owner_outros = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['OwnerOutro'];
+        //tile_title.textContent = store_tile.replace("_", " ");
         tile_image.src = store_image;
         audio_source.src = store_music;
         audio_master.load();
         audio_master.play();
+        // console.log('owner_intros', owner_intros);
+        // console.log("rand", getRndInteger(0, owner_intros.length - 1));
+
+        window.document.getElementById('display-dialog-box').style.display = "block";
+        var random_owner_intro = owner_intros[getRndInteger(0, owner_intros.length)];
+        window.document.getElementById('display-dialog-box').innerHTML = random_owner_intro;
+
+
         // game_pause = false;
         // play_stop_game();
       }
@@ -209,10 +306,13 @@
     //   return false;
     // }
     function set_top_level_tile(top_tile_name) {
-      arctica_current_top_tile_index = top_tile_name;
+      game_states['Top_Tile'] = top_tile_name;
       //game_states['Tile'] = top_tile_name;
     }
 
+    function getRndInteger(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
   </script>
 </body>
 
