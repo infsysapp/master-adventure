@@ -84,16 +84,16 @@ var arctica = {
                 {
                     'Armory':
                     {
-                        'Wolf_Skin': { 'Cost': 5, 'Resistance': '1d6' },
-                        'Bear_Leather': { 'Cost': 8, 'Resistance': '1d10' },
-                        'Cuirass': { 'Cost': 15, 'Resistance': '1d20' },
-                        'Dragon_Skin': { 'Cost': 25, 'Resistance': '2d20' }
+                        'Wolf_Skin': { 'Cost': 5, 'Resistance': '1d6', 'Quantity': 1 },
+                        'Bear_Leather': { 'Cost': 8, 'Resistance': '1d10', 'Quantity': 1 },
+                        'Cuirass': { 'Cost': 15, 'Resistance': '1d20', 'Quantity': 1 },
+                        'Dragon_Skin': { 'Cost': 25, 'Resistance': '2d20', 'Quantity': 1 }
                     },
                     'Weaponry': {
-                        'Dragon_Swords': { 'Cost': 20, 'Attack': '2d12' },
-                        'Ragnar_Axe': { 'Cost': 12, 'Attack': '1d20' },
-                        'Arrows': { 'Cost': 4, 'Attack': '1d8' },
-                        'Throwing_Knife': { 'Cost': 3, 'Attack': '1d6' }
+                        'Dragon_Swords': { 'Cost': 20, 'Attack': '2d12', 'Quantity': 1 },
+                        'Ragnar_Axe': { 'Cost': 12, 'Attack': '1d20', 'Quantity': 1 },
+                        'Arrows': { 'Cost': 4, 'Attack': '1d8', 'Quantity': 10 },
+                        'Throwing_Knife': { 'Cost': 3, 'Attack': '1d6', 'Quantity': 5 }
                     }
                 }
             }

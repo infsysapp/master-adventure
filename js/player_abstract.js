@@ -1,7 +1,12 @@
-var player_abstract = {
-    'Life' : 100,
+var player_states = {
     'PlayerName' : '',
-    'PlayerImagePath' : ''
+    'PlayerImagePath' : '',
+    'Life' : 100,
+    'Coins' : 10,
+    'Armor' : '',
+    'Weapon' : '',
+    'Arrows' : 0,
+    'Throwing_Knife' : 0
   };
 
   var sheet_1 = {
