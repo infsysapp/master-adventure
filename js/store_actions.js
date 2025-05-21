@@ -1,4 +1,46 @@
 
+    function access_store_button() {
+        if ( arctica['Store'] == true ) {
+          arctica['Store'] = false;
+          window.document.getElementById('access-store').textContent = "Enter Store";
+          window.document.getElementById('display-dialog-box').style.display = "none";
+          var text_title = '';
+          text_title = game_states['Top_Tile'].replaceAll("_", " ");
+          text_title += " - " + game_states['Tile'].replaceAll("_", " ");
+          tile_title.textContent = text_title;
+          tile_image.src = game_states['Image'];
+          audio_source.src = game_states['Music'];
+          audio_master.load();
+          audio_master.play();
+          return null;
+        }
+        if ( arctica[game_states['Top_Tile']][game_states['Tile']]['Store'] != 'X' ) {
+          arctica['Store'] = true;
+          window.document.getElementById('access-store').textContent = "Exit Store";
+          var store_tile = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['Name'];
+          var store_image = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['ImagePath'];
+          var store_music = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['MusicPath'];
+          var owner_intros = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['OwnerIntro'];
+          var owner_outros = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['OwnerOutro'];
+          //tile_title.textContent = store_tile.replace("_", " ");
+          tile_image.src = store_image;
+          audio_source.src = store_music;
+          audio_master.load();
+          audio_master.play();
+          // console.log('owner_intros', owner_intros);
+          // console.log("rand", getRndInteger(0, owner_intros.length - 1));
+  
+          window.document.getElementById('display-dialog-box').style.display = "block";
+          var random_owner_intro = owner_intros[getRndInteger(0, owner_intros.length)];
+          window.document.getElementById('display-dialog-box').innerHTML = random_owner_intro;
+  
+  
+          // game_pause = false;
+          // play_stop_game();
+        }
+        return null;
+      }
+
 function display_menu() {
 
     var menu_container = window.document.createElement( "DIV" );
@@ -76,10 +118,11 @@ function buy_item( item_type, item ) {
     }
 }
 
-function replace_action_btns_w_store_btns() {
+// Idea for the future? For simplicity, as is by pointing and clicking the li element that looks like a link.
+// function replace_action_btns_w_store_btns() {
 
-}
+// }
 
-function replace_store_btns_w_action_btns() {
+// function replace_store_btns_w_action_btns() {
 
-}
+// }
