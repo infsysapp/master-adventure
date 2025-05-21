@@ -79,7 +79,7 @@
       'Store': false
     };
     //game_states.push(player_abstract);
-    var game_pause = true;
+    var game_pause = false;
     var tile_title = window.document.getElementById("tile-title")
     var master_element = window.document.getElementById("master-element");
     var tile_image = master_element.children[0];
@@ -264,47 +264,6 @@
         play_stop_game();
       }
     }
-    function access_store_button() {
-      if (arctica['Store'] == true) {
-        arctica['Store'] = false;
-        window.document.getElementById('access-store').textContent = "Enter Store";
-        window.document.getElementById('display-dialog-box').style.display = "none";
-        var text_title = '';
-        text_title = game_states['Top_Tile'].replaceAll("_", " ");
-        text_title += " - " + game_states['Tile'].replaceAll("_", " ");
-        tile_title.textContent = text_title;
-        tile_image.src = game_states['Image'];
-        audio_source.src = game_states['Music'];
-        audio_master.load();
-        audio_master.play();
-        return null;
-      }
-      if (arctica[game_states['Top_Tile']][game_states['Tile']]['Store'] != 'X') {
-        arctica['Store'] = true;
-        window.document.getElementById('access-store').textContent = "Exit Store";
-        var store_tile = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['Name'];
-        var store_image = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['ImagePath'];
-        var store_music = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['MusicPath'];
-        var owner_intros = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['OwnerIntro'];
-        var owner_outros = arctica[game_states['Top_Tile']][game_states['Tile']]['Store']['OwnerOutro'];
-        //tile_title.textContent = store_tile.replace("_", " ");
-        tile_image.src = store_image;
-        audio_source.src = store_music;
-        audio_master.load();
-        audio_master.play();
-        // console.log('owner_intros', owner_intros);
-        // console.log("rand", getRndInteger(0, owner_intros.length - 1));
-
-        window.document.getElementById('display-dialog-box').style.display = "block";
-        var random_owner_intro = owner_intros[getRndInteger(0, owner_intros.length)];
-        window.document.getElementById('display-dialog-box').innerHTML = random_owner_intro;
-
-
-        // game_pause = false;
-        // play_stop_game();
-      }
-
-    }
     // function is_top_level_tile(top_tile_name) {
     //   var arctica_top_tile_list_count = arctica_top_tile_list.lenght;
     //   var obj_return = [];
@@ -324,6 +283,27 @@
     function getRndInteger(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    window.document.addEventListener( 'keydown', function( event ) {
+        switch ( event.key ) {
+            case 'ArrowUp':
+                window.document.getElementById( 'top-button' ).click();
+                break;
+            case 'ArrowDown':
+                window.document.getElementById( 'bottom-button' ).click();
+                break;
+            case 'ArrowLeft':
+                window.document.getElementById( 'left-button' ).click();
+                break;
+            case 'ArrowRight':
+                window.document.getElementById( 'right-button' ).click();
+                break;
+            case 'Enter':
+                window.document.getElementById( 'access-store' ).click();
+                break;
+        }
+    });
+
   </script>
   <script src="./js/store_actions.js"></script>
 </body>
